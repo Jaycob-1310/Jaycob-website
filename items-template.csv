@@ -1,11 +1,11 @@
-id,name,description,category,image_url,location
-coffee-corner,Coffee Corner,Cozy local cafe known for pour-over coffee and fresh pastries,Cafe,https://picsum.photos/seed/coffee-corner/800/600,Main Street
-green-grocer,Green Grocer,Neighborhood produce market with seasonal fruits and vegetables,Grocery,https://picsum.photos/seed/green-grocer/800/600,River District
-book-nook,The Book Nook,Independent bookstore with curated fiction and kids titles,Bookstore,https://picsum.photos/seed/book-nook/800/600,Oak Avenue
-fit-studio,Fit Studio,Small-group fitness classes for beginners and busy professionals,Fitness,https://picsum.photos/seed/fit-studio/800/600,North Plaza
-tech-stop,Tech Stop,Device accessories repair and setup help for phones and laptops,Electronics,https://picsum.photos/seed/tech-stop/800/600,Central Mall
-artisan-bites,Artisan Bites,Handmade sandwiches salads and daily soup specials,Restaurant,https://picsum.photos/seed/artisan-bites/800/600,Market Lane
-pet-haven,Pet Haven,Friendly pet supply shop with food toys and grooming essentials,Pet Store,https://picsum.photos/seed/pet-haven/800/600,Sunset Boulevard
-craft-hub,Craft Hub,Creative supply store for painting journaling and classroom projects,Crafts,https://picsum.photos/seed/craft-hub/800/600,West End
-city-cycles,City Cycles,Urban bike rentals tune-ups and safety gear for all ages,Sports,https://picsum.photos/seed/city-cycles/800/600,Hillside
-home-glow,Home Glow,Simple decor and lighting picks for dorms apartments and homes,Home,https://picsum.photos/seed/home-glow/800/600,Lakeside
+id,name,description,category,image_url,location,period
+tyrannosaurs-rex,T-Rex,"Carnivore that lived in North America.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Tyrannosaurus-rex-Profile-steveoc86_%28coloured%29%28mirror%29.png/500px-Tyrannosaurus-rex-Profile-steveoc86_%28coloured%29%28mirror%29.png,North America,Late Cretaceous
+spinosaurus-aegyptiacus,Spinosaurus,"Pescivore that lived in Northern Africa.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Spinosaurus_aegyptiacus_life_reconstruction.png/500px-Spinosaurus_aegyptiacus_life_reconstruction.png,Northern Africa,Late Cretaceous
+stegosaurus-stenops,Stegosaurus,"Herbivore that lived in the United States and Portugal.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Stegosaurus_stenops_Life_Reconstruction.png/500px-Stegosaurus_stenops_Life_Reconstruction.png,United States and Portugal,Late Jurassic
+ceratops-horridus,Triceratops,"Herbivore that lived in North America.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Triceratops_horridus.png/500px-Triceratops_horridus.png,North America,Late Cretaceous
+ankylosaurus-magniventris,Ankylosaurus,"Herbivore that lived in North America.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ankylosaurus_magniventris_by_sphenaphinae.png/500px-Ankylosaurus_magniventris_by_sphenaphinae.png,North America,Late Cretaceous
+carnotaurus-sastrei,Carnotaurus,"Carnivore that lived in South America.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Carnotaurus_Reconstruction_%282022%29.png/500px-Carnotaurus_Reconstruction_%282022%29.png,South America,Late Cretaceous
+brachiosaurus-altithorax,Brachiosaurus,"Herbivore that lived in North America.",Dinosaur,https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Brachiosaurus_altithorax_side_profile.png/500px-Brachiosaurus_altithorax_side_profile.png,North America,Late Jurassic
+mosasaurus-hoffmannii,Mosasaurus,"Carnivore that lived in the Atlantic Ocean.",Marine Reptile,https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Mosasaurus_missouriensis_NT.png/500px-Mosasaurus_missouriensis_NT.png,Atlantic Ocean,Late Cretaceous
+mammuthus-primigenius,Woolly Mammoth,"Herbivore that lived in North America, Asia, and Europe.",Mammal,https://i.pinimg.com/originals/a4/03/7c/a4037c74fad5aba6ffea14fd11811a03.jpg,"North America, Asia, and Europe",Middle Pleistocene
+pteranodon-longiceps,Pteranodon,"Pescavore that lived in North America.",Pterosaur,https://upload.wikimedia.org/wikipedia/commons/1/1f/Pteranodon_longiceps_mmartyniuk_wiki.png,North America,Late Cretaceous

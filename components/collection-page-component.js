@@ -35,7 +35,7 @@ export default {
               v-if="item.imageUrl"
               :src="item.imageUrl"
               :alt="item.name"
-              class="card-img-top collection-card-image object-fit-cover" />
+              class="card-img-top collection-card-image object-fit-contain" />
             <div
               v-else
               class="collection-card-image d-flex align-items-center justify-content-center bg-light text-muted">
@@ -52,6 +52,7 @@ export default {
                 {{ item.description || 'No description available.' }}
               </p>
 
+              <p class="small mb-1"><strong>Period:</strong> {{ item.period || 'Unknown' }}</p>
               <p class="small mb-3"><strong>Location:</strong> {{ item.location || 'N/A' }}</p>
 
               <div class="d-grid">

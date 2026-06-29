@@ -9,7 +9,7 @@ export default {
           <i class="bi bi-house me-1"></i>Home
         </router-link>
         <router-link class="btn btn-outline-primary btn-sm d-flex align-items-center" to="/items">
-          <i class="bi bi-card-list me-1"></i>Items
+          <i class="bi bi-card-list me-1"></i>Database
         </router-link>
         <router-link class="btn btn-outline-primary btn-sm" to="/about">
           <i class="bi bi-info-circle me-1"></i>About
