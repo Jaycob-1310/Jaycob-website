@@ -31,43 +31,42 @@ export default {
         Species not found.
       </div>
 
-      <article v-else class="detail-layout">
-        <div class="detail-visual">
-          <img
-            v-if="selectedItem.imageUrl"
-            :src="selectedItem.imageUrl"
-            :alt="selectedItem.name" />
-          <div
-            v-else
-            class="h-100 d-flex align-items-center justify-content-center text-muted">
-            No image available
-          </div>
+      <article v-else class="hero-panel">
+        <div class="hero-card-header mb-3">
+          <h2 class="h5 mb-0">{{ selectedItem.category || 'Species' }}</h2>
         </div>
 
-        <div class="detail-content">
-          <div class="d-flex align-items-center gap-2 mb-2">
-            <h1 class="h3 mb-0">{{ selectedItem.name }}</h1>
-            <span class="badge text-bg-primary">{{ selectedItem.category || 'General' }}</span>
+        <div class="hero-title-card mb-3">
+          <h1 class="h5 mb-2">{{ selectedItem.name }}</h1>
+          <p class="mb-0 text-muted">{{ selectedItem.description || 'No description available.' }}</p>
+        </div>
+
+        <div class="hero-content">
+          <div class="hero-card hero-image-card">
+            <img
+              v-if="selectedItem.imageUrl"
+              :src="selectedItem.imageUrl"
+              :alt="selectedItem.name"
+              class="hero-image" />
+            <div
+              v-else
+              class="hero-image d-flex align-items-center justify-content-center bg-light text-muted">
+              No image available
+            </div>
           </div>
 
-          <p class="lead mb-3">{{ selectedItem.description || 'No description available.' }}</p>
-
-          <div class="info-grid">
-            <div class="info-panel">
-              <strong>When</strong>
-              <div class="text-muted">{{ selectedItem.period || 'Unknown' }}</div>
+          <div class="hero-side-stack">
+            <div class="hero-side-card">
+              <h3 class="h6 mb-2">Information</h3>
+              <p class="mb-0 text-muted">{{ selectedItem.period || 'Unknown' }}, {{ selectedItem.location || 'N/A' }}, {{ selectedItem.family || 'N/A' }}, {{ selectedItem.diet || 'N/A' }}</p>
             </div>
-            <div class="info-panel">
-              <strong>Location</strong>
-              <div class="text-muted">{{ selectedItem.location || 'N/A' }}</div>
+            <div class="hero-side-card">
+              <h3 class="h6 mb-2">Discovery</h3>
+              <p class="mb-0 text-muted">{{ selectedItem.discoveryInfo || 'No discovery information available.' }}</p>
             </div>
-            <div class="info-panel" v-if="selectedItem.howLived">
-              <strong>How it lived</strong>
-              <div class="text-muted">{{ selectedItem.howLived }}</div>
-            </div>
-            <div class="info-panel">
-              <strong>Species ID</strong>
-              <div class="text-muted">{{ selectedItem.id }}</div>
+            <div class="hero-side-card">
+              <h3 class="h6 mb-2">Palaeobiology</h3>
+              <p class="mb-0 text-muted">{{ selectedItem.palaeobiologyInfo || 'No palaeobiology information available.' }}</p>
             </div>
           </div>
         </div>

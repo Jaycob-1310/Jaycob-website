@@ -60,6 +60,10 @@ const app = Vue.createApp({
                 imageUrl: String(row.image_url || '').trim(),
                 location: String(row.location || '').trim(),
                 period: String(row.period || '').trim(),
+                family: String(row.family || '').trim(),
+                diet: String(row.diet || '').trim(),
+                discoveryInfo: String(row.discovery_info || '').trim(),
+                palaeobiologyInfo: String(row.palaeobiology_info || '').trim(),
               }));
               itemsStore.error = '';
             }
