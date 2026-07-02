@@ -29,7 +29,7 @@ export default {
         <div class="hero-content">
           <div class="hero-card hero-image-card">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Ankylosaurus_magniventris_by_sphenaphinae.png/500px-Ankylosaurus_magniventris_by_sphenaphinae.png"
+              src="assets/Screenshot (1).png"
               alt="Illustration of prehistoric life"
               class="hero-image" />
           </div>

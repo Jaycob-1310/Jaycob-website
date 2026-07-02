@@ -2,7 +2,21 @@ export default {
   name: 'collection-page-component',
   setup() {
     const itemsStore = Vue.inject('itemsStore');
-    
+    const fallbackImage = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+      <svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+        <rect width="800" height="500" fill="#e7efe2"/>
+        <rect x="40" y="40" width="720" height="420" rx="24" fill="#f7fbf4" stroke="#b8cdb4" stroke-width="4"/>
+        <path d="M180 330c40-95 95-142 170-142s130 47 170 142" fill="none" stroke="#7fa16f" stroke-width="16" stroke-linecap="round"/>
+        <circle cx="280" cy="220" r="48" fill="#7fa16f"/>
+        <text x="400" y="270" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#4a5f45">Image unavailable</text>
+      </svg>
+    `);
+
+    const handleImageError = (event) => {
+      event.target.src = fallbackImage;
+      event.target.onerror = null;
+    };
+
     const filters = Vue.reactive({
       era: '',
       location: '',
@@ -38,6 +52,7 @@ export default {
       filters,
       getUniqueValues,
       filteredItems,
+      handleImageError,
     };
   },
   template: /* html */ `
@@ -139,14 +154,16 @@ export default {
       <div v-else class="row g-3">
         <div class="col-12 col-md-6 col-lg-4" v-for="item in filteredItems" :key="item.id">
           <article class="card h-100 shadow-sm border-0">
-            <img
-              v-if="item.imageUrl"
-              :src="item.imageUrl"
-              :alt="item.name"
-              class="card-img-top collection-card-image object-fit-contain" />
+            <div v-if="item.imageUrl" class="collection-image-panel">
+              <img
+                :src="item.imageUrl"
+                :alt="item.name"
+                class="card-img-top collection-card-image object-fit-contain"
+                @error="handleImageError" />
+            </div>
             <div
               v-else
-              class="collection-card-image d-flex align-items-center justify-content-center bg-light text-muted">
+              class="collection-image-panel d-flex align-items-center justify-content-center text-muted">
               No image available
             </div>
 
