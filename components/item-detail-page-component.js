@@ -84,6 +84,13 @@ export default {
               <h3 class="h6 mb-2">Palaeobiology</h3>
               <p class="mb-0 text-muted">{{ selectedItem.palaeobiologyInfo || 'No palaeobiology information available.' }}</p>
             </div>
+            <div class="hero-side-card">
+              <h3 class="h6 mb-2">Map view</h3>
+              <p class="mb-2 text-muted">See where this species is placed on the interactive fossil map.</p>
+              <router-link :to="'/map?species=' + selectedItem.id" class="btn btn-outline-primary btn-sm w-100">
+                View on map
+              </router-link>
+            </div>
           </div>
         </div>
       </article>

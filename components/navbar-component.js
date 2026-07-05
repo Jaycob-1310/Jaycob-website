@@ -11,6 +11,9 @@ export default {
         <router-link class="btn btn-outline-primary btn-sm d-flex align-items-center" to="/items">
           <i class="bi bi-card-list me-1"></i>Database
         </router-link>
+        <router-link class="btn btn-outline-primary btn-sm d-flex align-items-center" to="/map">
+          <i class="bi bi-geo-alt me-1"></i>Map
+        </router-link>
         <router-link class="btn btn-outline-primary btn-sm" to="/about">
           <i class="bi bi-info-circle me-1"></i>About
         </router-link>

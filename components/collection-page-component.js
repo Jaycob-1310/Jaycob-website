@@ -153,7 +153,7 @@ export default {
 
       <div v-else class="row g-3">
         <div class="col-12 col-md-6 col-lg-4" v-for="item in filteredItems" :key="item.id">
-          <article class="card h-100 shadow-sm border-0">
+          <article class="card h-100 collection-card">
             <div v-if="item.imageUrl" class="collection-image-panel">
               <img
                 :src="item.imageUrl"
