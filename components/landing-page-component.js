@@ -29,7 +29,7 @@ export default {
         <div class="hero-content">
           <div class="hero-card hero-image-card">
             <img
-              src="assets/Screenshot (1).png"
+              src="assets/Ankylosaurus.png"
               alt="Illustration of prehistoric life"
               class="hero-image" />
           </div>
