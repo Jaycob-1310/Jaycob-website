@@ -23,6 +23,7 @@ export default {
       family: '',
       diet: '',
       search: '',
+      sortBy: 'alphabetical',
     });
 
     const getUniqueValues = (field) => {
@@ -33,7 +34,7 @@ export default {
     };
 
     const filteredItems = Vue.computed(() => {
-      return itemsStore.items.filter((item) => {
+      let filtered = itemsStore.items.filter((item) => {
         const matchesEra = !filters.era || item.period === filters.era;
         const matchesLocation = !filters.location || item.location === filters.location;
         const matchesFamily = !filters.family || item.family === filters.family;
@@ -45,7 +46,34 @@ export default {
 
         return matchesEra && matchesLocation && matchesFamily && matchesDiet && matchesSearch;
       });
+
+      if (filters.sortBy === 'alphabetical') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (filters.sortBy === 'chronological') {
+        const periodOrder = [
+          'Early Permian',
+          'Late Devonian',
+          'Early Jurassic',
+          'Late Jurassic',
+          'Early Cretaceous',
+          'Late Cretaceous',
+          'Miocene',
+          'Middle Pleistocene'
+        ];
+        filtered.sort((a, b) => {
+          const aIndex = periodOrder.indexOf(a.period);
+          const bIndex = periodOrder.indexOf(b.period);
+          return aIndex - bIndex;
+        });
+      }
+
+      return filtered;
     });
+
+    const sortOptions = [
+      { value: 'alphabetical', label: 'Alphabetical' },
+      { value: 'chronological', label: 'Chronological' },
+    ];
 
     return {
       itemsStore,
@@ -53,11 +81,20 @@ export default {
       getUniqueValues,
       filteredItems,
       handleImageError,
+      sortOptions,
     };
   },
   template: /* html */ `
     <section class="container py-4">
-      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <label for="sort-select" class="form-label me-2">Sort by:</label>
+            <select id="sort-select" v-model="filters.sortBy" class="form-select d-inline-block w-auto">
+              <option v-for="option in sortOptions" :key="option.value" :value="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
         <h1 class="h3 mb-0">Collection</h1>
         <span class="badge text-bg-light border">{{ filteredItems.length }} shown</span>
       </div>
@@ -153,42 +190,38 @@ export default {
 
       <div v-else class="row g-3">
         <div class="col-12 col-md-6 col-lg-4" v-for="item in filteredItems" :key="item.id">
-          <article class="card h-100 collection-card">
-            <div v-if="item.imageUrl" class="collection-image-panel">
-              <img
-                :src="item.imageUrl"
-                :alt="item.name"
-                class="card-img-top collection-card-image object-fit-contain"
-                @error="handleImageError" />
-            </div>
-            <div
-              v-else
-              class="collection-image-panel d-flex align-items-center justify-content-center text-muted">
-              No image available
-            </div>
-
-            <div class="card-body d-flex flex-column">
-              <div class="d-flex justify-content-between align-items-start mb-2">
-                <h2 class="h5 card-title mb-0">{{ item.name }}</h2>
-                <span class="badge text-bg-primary ms-2">{{ item.category || 'General' }}</span>
+          <router-link :to="'/items/' + item.id" class="text-decoration-none text-reset">
+            <article class="card h-100 collection-card">
+              <div v-if="item.imageUrl" class="collection-image-panel">
+                <img
+                  :src="item.imageUrl"
+                  :alt="item.name"
+                  class="card-img-top collection-card-image object-fit-contain"
+                  @error="handleImageError" />
+              </div>
+              <div
+                v-else
+                class="collection-image-panel d-flex align-items-center justify-content-center text-muted">
+                No image available
               </div>
 
-              <p class="card-text text-muted flex-grow-1 collection-description">
-                {{ item.description || 'No description available.' }}
-              </p>
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <h2 class="h5 card-title mb-0">{{ item.name }}</h2>
+                  <span class="badge text-bg-primary ms-2">{{ item.category || 'General' }}</span>
+                </div>
 
-              <p class="small mb-1"><strong>Era:</strong> {{ item.period || 'Unknown' }}</p>
-              <p class="small mb-1"><strong>Location:</strong> {{ item.location || 'N/A' }}</p>
-              <p class="small mb-1"><strong>Family:</strong> {{ item.family || 'N/A' }}</p>
-              <p class="small mb-3"><strong>Diet:</strong> {{ item.diet || 'N/A' }}</p>
+                <p class="card-text text-muted flex-grow-1 collection-description">
+                  {{ item.description || 'No description available.' }}
+                </p>
 
-              <div class="d-grid">
-                <router-link :to="'/items/' + item.id" class="btn btn-outline-secondary btn-sm">
-                  View details
-                </router-link>
+                <p class="small mb-1"><strong>Era:</strong> {{ item.period || 'Unknown' }}</p>
+                <p class="small mb-1"><strong>Location:</strong> {{ item.location || 'N/A' }}</p>
+                <p class="small mb-1"><strong>Family:</strong> {{ item.family || 'N/A' }}</p>
+                <p class="small mb-3"><strong>Diet:</strong> {{ item.diet || 'N/A' }}</p>
               </div>
-            </div>
-          </article>
+            </article>
+          </router-link>
         </div>
       </div>
     </section>
