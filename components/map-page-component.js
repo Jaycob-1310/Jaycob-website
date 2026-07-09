@@ -78,14 +78,40 @@ export default {
     const getLocationPosition = (locationValue, fallbackIndex = 0) => {
       const normalized = String(locationValue || '').trim().toLowerCase();
 
+      console.log('getLocationPosition called with:', locationValue, 'normalized:', normalized);
+
       if (!normalized) {
-        return getFallbackPosition(fallbackIndex);
+        const fallback = getFallbackPosition(fallbackIndex);
+        console.log('No location provided, using fallback:', fallback);
+        return fallback;
       }
 
-      const geoLookup = {
+      // Prioritize oceans and continents for label
+      const oceanContinentLookup = {
+        'atlantic ocean': { x: 41.0, y: 44.5, label: 'Atlantic Ocean' },
+        'pacific ocean': { x: 12.4, y: 54.3, label: 'Pacific Ocean' },
+        'arctic ocean': { x: 54.4, y: 15.0, label: 'Arctic Ocean' },
+        'indian ocean': { x: 60.0, y: 50.0, label: 'Indian Ocean' },
+        'southern ocean': { x: 50.0, y: 90.0, label: 'Southern Ocean' },
         'north america': { x: 20.4, y: 35.8, label: 'North America' },
+        'south america': { x: 29.4, y: 67.8, label: 'South America' },
+        'africa': { x: 54.4, y: 59.4, label: 'Africa' },
+        'europe': { x: 49.6, y: 32.0, label: 'Europe' },
+        'asia': { x: 70.8, y: 38.0, label: 'Asia' },
+        'australia': { x: 84.2, y: 76.8, label: 'Australia' },
+        'antarctica': { x: 52.2, y: 93.5, label: 'Antarctica' },
+      };
+
+      for (const key in oceanContinentLookup) {
+        if (normalized.includes(key)) {
+          console.log('Matched ocean/continent:', key, oceanContinentLookup[key]);
+          return oceanContinentLookup[key];
+        }
+      }
+
+      // Fallback to previous detailed locations
+      const geoLookup = {
         'united states': { x: 20.4, y: 35.8, label: 'United States' },
-        'usa': { x: 20.4, y: 35.8, label: 'United States' },
         'north dakota': { x: 21.2, y: 28.0, label: 'North Dakota' },
         'montana': { x: 19.8, y: 26.0, label: 'Montana' },
         'colorado': { x: 22.5, y: 33.0, label: 'Colorado' },
@@ -94,35 +120,32 @@ export default {
         'kansas': { x: 24.4, y: 36.0, label: 'Kansas' },
         'egypt': { x: 53.8, y: 46.0, label: 'Egypt' },
         'northern africa': { x: 53.8, y: 46.0, label: 'Northern Africa' },
-        'africa': { x: 54.4, y: 59.4, label: 'Africa' },
-        'south america': { x: 29.4, y: 67.8, label: 'South America' },
-        'europe': { x: 49.6, y: 32.0, label: 'Europe' },
-        'asia': { x: 70.8, y: 38.0, label: 'Asia' },
-        'atlantic ocean': { x: 41.0, y: 44.5, label: 'Atlantic Ocean' },
-        'pacific ocean': { x: 12.4, y: 54.3, label: 'Pacific Ocean' },
-        'arctic': { x: 54.4, y: 15.0, label: 'Arctic' },
-        'australia': { x: 84.2, y: 76.8, label: 'Australia' },
-        'antarctica': { x: 52.2, y: 93.5, label: 'Antarctica' },
       };
 
       if (geoLookup[normalized]) {
         const geo = geoLookup[normalized];
+        console.log('Matched geoLookup:', normalized, geo);
         return { x: geo.x, y: geo.y, label: geo.label };
       }
 
-      if (normalized.includes('north america') || normalized.includes('united states') || normalized.includes('usa')) {
+      // Fallback to generic continent or ocean if included
+      if (normalized.includes('united states') || normalized.includes('usa')) {
+        console.log('Matched generic United States to North America');
         return { x: 20.4, y: 38.9, label: 'North America' };
       }
 
       if (normalized.includes('north dakota')) {
+        console.log('Matched generic North Dakota');
         return { x: 21.2, y: 32.4, label: 'North Dakota' };
       }
 
       if (normalized.includes('montana')) {
+        console.log('Matched generic Montana');
         return { x: 19.8, y: 30.0, label: 'Montana' };
       }
 
       if (normalized.includes('colorado')) {
+        console.log('Matched generic Colorado');
         return { x: 22.6, y: 36.2, label: 'Colorado' };
       }
 
@@ -142,38 +165,6 @@ export default {
         return { x: 54.4, y: 49.0, label: 'Egypt' };
       }
 
-      if (normalized.includes('south america')) {
-        return { x: 29.8, y: 69.8, label: 'South America' };
-      }
-
-      if (normalized.includes('europe')) {
-        return { x: 49.8, y: 33.4, label: 'Europe' };
-      }
-
-      if (normalized.includes('asia')) {
-        return { x: 70.8, y: 38.6, label: 'Asia' };
-      }
-
-      if (normalized.includes('atlantic ocean')) {
-        return { x: 41.0, y: 44.8, label: 'Atlantic Ocean' };
-      }
-
-      if (normalized.includes('pacific ocean')) {
-        return { x: 12.0, y: 54.8, label: 'Pacific Ocean' };
-      }
-
-      if (normalized.includes('arctic')) {
-        return { x: 54.5, y: 15.0, label: 'Arctic' };
-      }
-
-      if (normalized.includes('australia')) {
-        return { x: 84.2, y: 77.2, label: 'Australia' };
-      }
-
-      if (normalized.includes('antarctica')) {
-        return { x: 52.2, y: 93.8, label: 'Antarctica' };
-      }
-
       return getFallbackPosition(fallbackIndex);
     };
 
@@ -187,13 +178,13 @@ export default {
       const nameLookup = String(item.name || '').trim().toLowerCase();
 
       const overrides = {
-        'tyrannosaurs-rex': { x: 21.2, y: 28.0, label: 'North Dakota' },
-        'ankylosaurus-magniventris': { x: 19.8, y: 26.0, label: 'Montana' },
-        'stegosaurus-stenops': { x: 22.5, y: 33.0, label: 'Colorado' },
-        'ceratops-horridus': { x: 21.5, y: 30.6, label: 'South Dakota' },
-        'brachiosaurus-altithorax': { x: 20.4, y: 29.2, label: 'Wyoming' },
-        'pteranodon-longiceps': { x: 24.4, y: 36.0, label: 'Kansas' },
-        'spinosaurus-aegyptiacus': { x: 53.8, y: 46.0, label: 'Egypt' },
+        'tyrannosaurs-rex': { x: 21.2, y: 28.0, label: 'North America' },
+        'ankylosaurus-magniventris': { x: 19.8, y: 26.0, label: 'North America' },
+        'stegosaurus-stenops': { x: 22.5, y: 33.0, label: 'North America' },
+        'ceratops-horridus': { x: 21.5, y: 30.6, label: 'North America' },
+        'brachiosaurus-altithorax': { x: 20.4, y: 29.2, label: 'North America' },
+        'pteranodon-longiceps': { x: 24.4, y: 36.0, label: 'North America' },
+        'spinosaurus-aegyptiacus': { x: 53.8, y: 46.0, label: 'Africa' },
       };
 
       return overrides[idLookup] || overrides[nameLookup] || null;
@@ -205,7 +196,7 @@ export default {
         return {
           id: item.id,
           item,
-          label: speciesOverride.label,
+          label: speciesOverride.label || 'Unknown Location',
           x: speciesOverride.x,
           y: speciesOverride.y,
         };
@@ -222,7 +213,7 @@ export default {
       return {
         id: item.id,
         item,
-        label: position.label,
+        label: position.label || 'Unknown Location',
         x: position.x,
         y: position.y,
       };
@@ -355,7 +346,7 @@ export default {
                     'map-marker-selected': point.item.id === selectedSpeciesId
                   }"
                   :style="{ left: point.x + '%', top: point.y + '%' }"
-                  :title="point.item.name + ' · ' + point.label"
+                  :title="point.item.name + ' · ' + (point.label || 'Unknown Location')"
                   @click="handleMarkerClick(point)">
                   <span class="map-marker-dot"></span>
                 </button>
