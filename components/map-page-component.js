@@ -261,7 +261,7 @@ export default {
         <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
           <div>
             <span class="accent-pill"><i class="bi bi-geo-alt-fill"></i> Interactive fossil map</span>
-            <h1 class="h3 mb-2">Explore where these extinct species lived</h1>
+            <h1 class="h3 mb-2 custom-main-title" style="font-size: 2rem !important;">Explore where these extinct species lived</h1>
             <p class="mb-0 text-muted">Use the filters to narrow the species shown on the map, then click a marker to inspect that species in detail.</p>
           </div>
           <router-link to="/items" class="nav-pill nav-pill-outline"><i class="bi bi-arrow-left me-1"></i>Back to collection</router-link>
@@ -282,7 +282,7 @@ export default {
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                  <h2 class="h5 mb-1">Species locations</h2>
+                  <h2 class="h5 mb-1 custom-subheader">Species locations</h2>
                   <p class="text-muted small mb-0">The map updates with the active filters.</p>
                 </div>
                 <span class="badge text-bg-light border">{{ mapPoints.length }} markers</span>

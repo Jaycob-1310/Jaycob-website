@@ -8,11 +8,11 @@ export default {
           <h2 class="h5 mb-0">Jaycob Smith</h2>
         </div>
         <div class="hero-content">
-          <div class="hero-card hero-image-card">
+          <div class="hero-card hero-image-card" style="max-width: 200px;">
             <img
               src="assets/Jaycob-photo.png"
               alt="Photo of Jaycob Smith"
-              class="hero-image" style="max-width: 300px; height: auto; border-radius: 8px;" />
+              class="hero-image" style="max-width: 100%; height: auto; border-radius: 8px;" />
           </div>
 
           <div class="hero-side-stack">
@@ -27,10 +27,12 @@ export default {
               </div>
               <div class="hero-side-card" style="flex: 1 1 100%; min-width: 200px;">
                 <h3 class="h6 mb-2">Contact Information</h3>
-                <p class="mb-0 text-muted" style="word-wrap: break-word; width: 100%;">Phone Number: [PHONE] | Email: [EMAIL]</p>
+                <p class="mb-0 text-muted" style="word-wrap: break-word; width: 100%;">Phone Number: 765-722-0729 | Email: jaycob1310@gmail.com</p>
               </div>
             </div>
           </div>
+        </div>
+      </div>
     </section>
-  `,
+    `,
 };
