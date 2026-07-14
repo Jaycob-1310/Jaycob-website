@@ -15,7 +15,8 @@
 
 body {
   margin: 0;
-  background: linear-gradient(135deg, #f7fbf4 0%, #dfead9 52%, #c6ddbf 100%);
+  background-color: rgba(34, 139, 34, 0.6); /* darker transparent green */
+  background-image: none;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: var(--forest-900);
 }
